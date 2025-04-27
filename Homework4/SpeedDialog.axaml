@@ -12,3 +12,5 @@
                    Text="Invalid input. Please enter a number > 0."/>
     </StackPanel>
 </Window>
+
+<!-- Provides UI for user to set the simulation speed multiplier -->

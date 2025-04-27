@@ -27,5 +27,11 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [C:/Users/daliu/Desktop/AOOP_Homework_3/Homework4/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[C:/Users/daliu/Desktop/AOOP_Homework_3/Homework4/MessageBox.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[C:/Users/daliu/Desktop/AOOP_Homework_3/Homework4/NewOrderWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [C:/Users/daliu/Desktop/AOOP_Homework_3/Homework4/SpeedDialog.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
