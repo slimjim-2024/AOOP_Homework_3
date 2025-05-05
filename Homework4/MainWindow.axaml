@@ -2,18 +2,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="using:Homework4"
         xmlns:vm="using:Homework4.ViewModels"
-        x:Class="Homework4.MainWindow"
         x:DataType="vm:MainWindowViewModel"
+        x:Class="Homework4.MainWindow"
         Title="Homework4"
         Width="800"
         Height="600"
-        FontFamily="Arial">
+        FontFamily="Arial" Background="#e7d3d4">
 
   <!-- Layout grid: rows for header, controls, active recipes, and footer -->
   <Grid Margin="20" RowDefinitions="Auto,Auto,*,Auto">
 
     <!-- Header: displays the app name centered -->
-    <Border Grid.Row="0" Background="#B40614" CornerRadius="5" Padding="15" HorizontalAlignment="Center">
+    <Border Grid.Row="0" Background="{StaticResource panelBackground}" CornerRadius="5" Padding="15" HorizontalAlignment="Center">
       <TextBlock Text="The app name"
                  Foreground="White"
                  FontSize="24"
@@ -21,38 +21,34 @@
     </Border>
 
     <!-- Controls: Start/Stop and New Order/Speed buttons -->
-    <Grid Grid.Row="1" Margin="0 15">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
+    <UniformGrid Columns="4" HorizontalAlignment="Stretch"
+                Grid.Row="1" Margin="0 15" Background="{StaticResource panelBackground}" >
+      
       <!-- Start simulation -->
-      <Button Grid.Column="0" Content="Start"
+      <Button Content="Start" HorizontalAlignment="Center"
               Background="#34912A" Foreground="White"
               Margin="5" Padding="10 5" FontSize="14" CornerRadius="3"
               Command="{Binding StartSimulationCommand}"/>
       <!-- Stop simulation -->
-      <Button Grid.Column="1" Content="Stop"
+      <Button Content="Stop" HorizontalAlignment="Center"
               Background="#34912A" Foreground="White"
               Margin="5" Padding="10 5" FontSize="14" CornerRadius="3"
               Command="{Binding StopSimulationCommand}"/>
       <!-- Open New Order dialog -->
-      <Button Grid.Column="2" Content="New Order"
+      <Button Content="New Order" HorizontalAlignment="Center"
               Background="#34912A" Foreground="White"
               Margin="5" Padding="10 5" FontSize="14" CornerRadius="3"
               Click="OnNewOrderClick"/>
       <!-- Adjust speed -->
-      <Button x:Name="SpeedButton" Grid.Column="3" Content="Speed (1x)"
+      <Button x:Name="SpeedButton" Content="Speed (1x)" HorizontalAlignment="Center"
               Background="#34912A" Foreground="White"
               Margin="5" Padding="10 5" FontSize="14" CornerRadius="3"
               Click="OnSpeedButtonClick"/>
-    </Grid>
+    </UniformGrid>
 
     <!-- Active Recipes: list of current recipe simulations -->
-    <Border Grid.Row="2" Background="#B40614" CornerRadius="5" Padding="15" Margin="0 15">
-      <StackPanel Spacing="10">
+    <Border Grid.Row="3" Background="{StaticResource panelBackground}" CornerRadius="5" Padding="15" Margin="0 15">
+      <StackPanel Spacing="10" VerticalAlignment="Stretch">
         <!-- Shows count of active recipes -->
         <TextBlock Text="{Binding ActiveRecipesCount, StringFormat='Active Recipes - {0}'}"
                    Foreground="White" FontSize="16" FontWeight="Bold"/>
@@ -67,7 +63,7 @@
                 <TextBlock Text="{Binding Progress, StringFormat='{}{0:F0}%'}"
                            Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="2"/>
                 <!-- Remove this recipe from the list -->
-                <Button Content="X" Background="#B40614" Foreground="White" Grid.Column="3"
+                <Button Content="X" Background="{StaticResource panelBackground}" Foreground="White" Grid.Column="3"
                         Command="{Binding RemoveCommand}" Margin="5 0 0 0"/>
               </Grid>
             </DataTemplate>
@@ -77,25 +73,29 @@
     </Border>
 
     <!-- Inventory & Status: static placeholders for now -->
-    <Grid Grid.Row="3" ColumnDefinitions="*,*" Margin="0 15">
+    <UniformGrid Grid.Row="2" Columns="2" Margin="0 15">
       <!-- Inventory section shows available items -->
-      <Border Background="#B40614" CornerRadius="5" Padding="15" Margin="0 0 10 0">
-        <StackPanel>
-          <TextBlock Text="Inventory" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
-          <TextBlock Text="Tomato: 10 pcs" Foreground="White"/>
-          <TextBlock Text="Onion: 5 pcs" Foreground="White"/>
-          <TextBlock Text="Cheese: 450 grams" Foreground="White"/>
-          <TextBlock Text="Basil: 15 leaves" Foreground="White"/>
-          <TextBlock Text="Pasta: 0.95 kg" Foreground="White"/>
-          <TextBlock Text="Beef steak: 3 pcs" Foreground="White"/>
-        </StackPanel>
-      </Border>
+          
+        <Border Background="{StaticResource panelBackground}" CornerRadius="5" Padding="15" Margin="0 0 10 0" VerticalAlignment="Stretch">
+          <StackPanel Orientation="Vertical">
+            <TextBlock Text="Inventory" Foreground="White" FontSize="20" Padding="6 8" HorizontalAlignment="Center"/>
+            <ListBox Background="{StaticResource panelBackground}" Padding="8 12">
+              <ListBoxItem Padding="4 1"><TextBlock Text="Tomato: 10 pcs" Foreground="White"/></ListBoxItem>
+              <ListBoxItem Padding="4 1"><TextBlock Text="Onion: 5 pcs" Foreground="White"/></ListBoxItem>
+              <ListBoxItem Padding="4 1"><TextBlock Text="Cheese: 450 grams" Foreground="White"/></ListBoxItem>
+              <ListBoxItem Padding="4 1"><TextBlock Text="Basil: 15 leaves" Foreground="White"/></ListBoxItem>
+              <ListBoxItem Padding="4 1"><TextBlock Text="Pasta: 0.95 kg" Foreground="White"/></ListBoxItem>
+              <ListBoxItem Padding="4 1"><TextBlock Text="Beef steak: 3 pcs" Foreground="White"/></ListBoxItem>
+            </ListBox>
+          </StackPanel>
+        </Border>
+
       <!-- Status Report placeholder for completed recipes -->
-      <Border Grid.Column="1" Background="#B40614" CornerRadius="5" Padding="15" Margin="10 0 0 0">
+      <Border Background="{StaticResource panelBackground}" CornerRadius="5" Padding="15" Margin="10 0 0 0" VerticalAlignment="Stretch">
         <StackPanel>
           <TextBlock Text="Status Report" Foreground="White" FontSize="16" FontWeight="Bold" Margin="0 0 0 10"/>
         </StackPanel>
       </Border>
-    </Grid>
+    </UniformGrid>
   </Grid>
 </Window>

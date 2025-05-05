@@ -121,5 +121,6 @@ namespace Homework4.ViewModels
                 Dispatcher.UIThread.Post(() => ActiveRecipes.Remove(recipe));
             }
         }
+        
     }
 }

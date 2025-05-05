@@ -6,4 +6,8 @@
     <Application.Styles>
         <FluentTheme />
     </Application.Styles>
+    <Application.Resources>
+        <Color x:Key="panelBackground">#a24e4e</Color>
+        <Color x:Key="panelForeground">#fff1cf</Color>
+    </Application.Resources>
 </Application>

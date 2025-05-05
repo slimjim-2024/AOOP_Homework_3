@@ -7,12 +7,11 @@ namespace Homework4
 {
     public partial class MainWindow : Window
     {
-        private readonly MainWindowViewModel _vm;
+        private readonly MainWindowViewModel _vm = new MainWindowViewModel(); 
 
         public MainWindow()
         {
             InitializeComponent();             // Load XAML contents
-            _vm = new MainWindowViewModel();   // Create ViewModel instance
             DataContext = _vm;                 // Bind UI to ViewModel
         }
 
