@@ -1,3 +1,4 @@
+using System;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Diagnostics;
@@ -6,13 +7,18 @@ namespace Homework4
 {
     public partial class MessageBox : Window
     {
-        public string Message { get; }
+        public string Message { get; } = String.Empty;
 
         public MessageBox(string title, string message)
         {
             Title = title; 
             Message = message;
             DataContext = this; 
+            InitializeComponent();
+        }
+
+        public MessageBox()
+        {
             InitializeComponent();
         }
 

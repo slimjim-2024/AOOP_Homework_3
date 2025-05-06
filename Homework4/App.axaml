@@ -5,9 +5,13 @@
 
     <Application.Styles>
         <FluentTheme />
+            <Style Selector="ListBox.RecipeList > ListBoxItem">
+                <Setter Property="Padding" Value="4 2"/>
+            </Style>
     </Application.Styles>
     <Application.Resources>
-        <Color x:Key="panelBackground">#a24e4e</Color>
-        <Color x:Key="panelForeground">#fff1cf</Color>
+        <Color x:Key="PanelBackground">#a24e4e</Color>
+        <Color x:Key="PanelForeground">#fff1cf</Color>
+        <Color x:Key="WindowColor">#e7d3d4</Color>
     </Application.Resources>
 </Application>

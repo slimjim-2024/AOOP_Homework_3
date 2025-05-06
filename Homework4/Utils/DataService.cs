@@ -7,5 +7,6 @@ namespace Homework4
     {
         // Shared list of recipes; UI binds here to display available recipes
         public static ObservableCollection<Recipe> LoadedRecipes { get; } = new();
+        public static ObservableCollection<Ingredient> Ingredients { get; } = new();
     }
 }

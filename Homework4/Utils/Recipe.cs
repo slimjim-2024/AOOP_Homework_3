@@ -29,9 +29,6 @@ namespace Homework4
     public class RecipeStep
     {
         public string Step { get; set; } = string.Empty;    // Description of the step, "Boil water"
-        public int Duration { get; set; }                  // Duration in seconds
+        public int Duration { get; set; } = 0; // Duration in seconds
     }
 }
-
-//file responsible for loading and parsing JSON data into C# objects. 
-// Ingredients and Recipes arrays, and Ingredient/Recipe/RecipeStep from the JSON file

@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using ReactiveUI;
 using System.Reactive;
+using System.Threading;
+using System.Threading.Tasks;
+using CommunityToolkit.Mvvm.Input;
+using Homework4.ViewModels;
 
 namespace Homework4
 {
     // Represents a recipe in progress, with timing and removal support
-    public class ActiveRecipe : ReactiveObject
+    public partial class ActiveRecipe : HybridViewModel
     {
+        protected internal static MainWindowViewModel _viewModel;
         // Recipe name
         public string Name { get; }
 
         // Steps to complete, each with a duration
         public List<RecipeStep> Steps { get; }
+        public CancellationTokenSource CancellationToken { get; set; } = new();
+
 
         // Total duration (sum of all steps) in milliseconds
         public int TotalDuration { get; }
@@ -27,9 +34,12 @@ namespace Homework4
         }
 
         // Progress percentage (0-100)
-        public double Progress => TotalDuration > 0
-            ? (double)ElapsedTime / TotalDuration * 100
-            : 0;
+        private double _progress;
+        public double Progress
+        {
+            get => _progress;
+            set => this.RaiseAndSetIfChanged(ref _progress, value);
+        }
 
         private string _currentStep = string.Empty;
         // Description of the current step
@@ -39,11 +49,17 @@ namespace Homework4
             set => this.RaiseAndSetIfChanged(ref _currentStep, value);
         }
 
+        [RelayCommand]
+        public async Task CancelRecipe()
+        {
+            await Task.Run(()=>_viewModel.CancelRecipeCommand(this));
+        }
+        
         // Command to remove this recipe from the active list
         public ReactiveCommand<Unit, Unit> RemoveCommand { get; }
 
         // Construct with a model and a removal callback
-        public ActiveRecipe(Recipe recipe, Action<ActiveRecipe> removeAction)
+        /*public ActiveRecipe(Recipe recipe, Action<ActiveRecipe> removeAction)
         {
             Name = recipe.Name ?? throw new ArgumentNullException(nameof(recipe));
             Steps = recipe.Steps ?? throw new ArgumentNullException(nameof(recipe.Steps));
@@ -55,6 +71,13 @@ namespace Homework4
                 canExecute: null,
                 outputScheduler: RxApp.MainThreadScheduler
             );
+        }*/
+        public ActiveRecipe(Recipe recipe)
+        {
+            Name = recipe.Name ?? throw new ArgumentNullException(nameof(recipe));
+            Steps = recipe.Steps ?? throw new ArgumentNullException(nameof(recipe.Steps));
+            TotalDuration = Steps.Sum(s => s.Duration * 1000);
+
         }
     }
 }
